@@ -1,6 +1,6 @@
-# AuroraCGP
+# Collective Intelligence Platform
 
-Plataforma colaborativa con gobernanza colectiva. 
+Plataforma de colaboración integrada para la inteligencia colectiva e incorporando el modelo de gobernanza distribuida basada en innovación en política digital. 
 
 Más información en https://aurora.ong
 Para contribuir contacta a Pavel Delgado (p.delgado@aurora.ong)
@@ -14,7 +14,7 @@ Para contribuir contacta a Pavel Delgado (p.delgado@aurora.ong)
 
 1. Ejecutar `mix deps.get`
 2. Correr instancia DB 
-`docker run --env=POSTGRES_PASSWORD=aurora_cgp -p 4500:5432 --name=aurora-cgp -d postgres:latest`
+`docker run --env=POSTGRES_PASSWORD=aurora_cip -p 4500:5432 --name=aurora-cip -d postgres:latest`
 3. Comprobar configuración de DBs (son 2) `config/config.exs`
 4. Inicializar DB 
 `mix db.setup`
@@ -25,20 +25,20 @@ Para contribuir contacta a Pavel Delgado (p.delgado@aurora.ong)
 
 ### Registrar persona
 
-`%AuroraCGP.Projector.Model.Person{} = AuroraCGP.Context.PersonContext.register_person!(%{person_name: "Camila Saez", person_mail: "c.saez@gmail.com"})`
+`%AuroraCIP.Projector.Model.Person{} = AuroraCIP.Context.PersonContext.register_person!(%{person_name: "Camila Saez", person_mail: "c.saez@gmail.com"})`
 
-`%AuroraCGP.Projector.Model.Person{} = AuroraCGP.Context.PersonContext.register_person!(%{person_name: "Pedro Diaz", person_mail: "p.diaz@gmail.com"})`
+`%AuroraCIP.Projector.Model.Person{} = AuroraCIP.Context.PersonContext.register_person!(%{person_name: "Pedro Diaz", person_mail: "p.diaz@gmail.com"})`
 
 ### Crear una unidad organizacional
 
-`:ok = AuroraCGP.dispatch(%AuroraCGP.Command.CreateOU{ou_id: "raiz", ou_name: "Raiz ORG", ou_description: "Creada para enraizar", ou_goal: "Fomentar la cultura de raíz"})`
+`:ok = AuroraCIP.dispatch(%AuroraCIP.Command.CreateOU{ou_id: "raiz", ou_name: "Raiz ORG", ou_description: "Creada para enraizar", ou_goal: "Fomentar la cultura de raíz"})`
 
-`:ok = AuroraCGP.dispatch(%AuroraCGP.Command.CreateOU{ou_id: "raiz.sub", ou_name: "SUB Departamento finanzas", ou_description: "Creada para financiar", ou_goal: "Financiar la organización"})`
+`:ok = AuroraCIP.dispatch(%AuroraCIP.Command.CreateOU{ou_id: "raiz.sub", ou_name: "SUB Departamento finanzas", ou_description: "Creada para financiar", ou_goal: "Financiar la organización"})`
 
 ### Iniciar una membresía
 
-`:ok = AuroraCGP.dispatch(%AuroraCGP.Command.StartMembership{ou_id: "raiz", person_id: "111"})`
+`:ok = AuroraCIP.dispatch(%AuroraCIP.Command.StartMembership{ou_id: "raiz", person_id: "111"})`
 
-`:ok = AuroraCGP.dispatch(%AuroraCGP.Command.StartMembership{ou_id: "raiz", person_id: "333"})`
-`:ok = AuroraCGP.dispatch(%AuroraCGP.Command.StartMembership{ou_id: "raiz.sub", person_id: "333"})`
+`:ok = AuroraCIP.dispatch(%AuroraCIP.Command.StartMembership{ou_id: "raiz", person_id: "333"})`
+`:ok = AuroraCIP.dispatch(%AuroraCIP.Command.StartMembership{ou_id: "raiz.sub", person_id: "333"})`
 
