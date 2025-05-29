@@ -7,19 +7,19 @@
 # General application configuration
 import Config
 
-config :aurora_cgp,
-  namespace: AuroraCGP,
-  ecto_repos: [AuroraCGP.Projector.Repo],
-  event_stores: [AuroraCGP.EventStore]
+config :aurora_gov,
+  namespace: AuroraGov,
+  ecto_repos: [AuroraGov.Projector.Repo],
+  event_stores: [AuroraGov.EventStore]
 
 # Configures the endpoint
-config :aurora_cgp, AuroraCGPWeb.Endpoint,
+config :aurora_gov, AuroraGovWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: AuroraCGPWeb.ErrorHTML, json: AuroraCGPWeb.ErrorJSON],
+    formats: [html: AuroraGovWeb.ErrorHTML, json: AuroraGovWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: AuroraCGP.PubSub,
+  pubsub_server: AuroraGov.PubSub,
   live_view: [signing_salt: "N2bYOhyb"]
 
 # Configures the mailer
@@ -29,7 +29,7 @@ config :aurora_cgp, AuroraCGPWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :aurora_cgp, AuroraCGP.Mailer, adapter: Swoosh.Adapters.Local
+config :aurora_gov, AuroraGov.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,

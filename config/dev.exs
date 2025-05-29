@@ -1,23 +1,23 @@
 import Config
 
 # Configure your eventstore database
-config :aurora_cgp, AuroraCGP.EventStore,
+config :aurora_gov, AuroraGov.EventStore,
   serializer: Commanded.Serialization.JsonSerializer,
   username: "postgres",
-  password: "aurora_cgp",
+  password: "aurora_gov",
   hostname: "localhost",
-  database: "aurora_cgp_eventstore_dev",
+  database: "aurora_gov_eventstore_dev",
   stacktrace: true,
   port: 4500,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
 # Configure your projection database
-config :aurora_cgp, AuroraCGP.Projector.Repo,
+config :aurora_gov, AuroraGov.Projector.Repo,
   username: "postgres",
-  password: "aurora_cgp",
+  password: "aurora_gov",
   hostname: "localhost",
-  database: "aurora_cgp_projection_dev",
+  database: "aurora_gov_projection_dev",
   stacktrace: true,
   port: 4500,
   show_sensitive_data_on_connection_error: true,
@@ -29,7 +29,7 @@ config :aurora_cgp, AuroraCGP.Projector.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :aurora_cgp, AuroraCGPWeb.Endpoint,
+config :aurora_gov, AuroraGovWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
@@ -66,17 +66,17 @@ config :aurora_cgp, AuroraCGPWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :aurora_cgp, AuroraCGPWeb.Endpoint,
+config :aurora_gov, AuroraGovWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/aurora_cgp_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/aurora_gov_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :aurora_cgp, dev_routes: true
+config :aurora_gov, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

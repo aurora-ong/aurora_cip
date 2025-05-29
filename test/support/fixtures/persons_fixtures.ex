@@ -1,7 +1,7 @@
-defmodule AuroraCGP.PersonsFixtures do
+defmodule AuroraGov.PersonsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `AuroraCGP.Persons` context.
+  entities via the `AuroraGov.Persons` context.
   """
 
   def unique_person_email, do: "person#{System.unique_integer()}@example.com"
@@ -18,7 +18,7 @@ defmodule AuroraCGP.PersonsFixtures do
     {:ok, person} =
       attrs
       |> valid_person_attributes()
-      |> AuroraCGP.Persons.register_person()
+      |> AuroraGov.Persons.register_person()
 
     person
   end

@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(AuroraCGP.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(AuroraGov.Repo, :manual)

@@ -1,4 +1,4 @@
-defmodule AuroraCGP.Projector.Repo.Migrations.AddOUTable do
+defmodule AuroraGov.Projector.Repo.Migrations.AddOUTable do
   use Ecto.Migration
 
   def change do

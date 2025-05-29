@@ -1,9 +1,9 @@
-defmodule AuroraCGP.MixProject do
+defmodule AuroraGov.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :aurora_cgp,
+      app: :aurora_gov,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule AuroraCGP.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {AuroraCGP.Application, []},
+      mod: {AuroraGov.Application, []},
       extra_applications: [:logger, :runtime_tools, :wx, :observer]
     ]
   end

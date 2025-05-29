@@ -1,4 +1,4 @@
-defmodule AuroraCGP.Projector.Repo.Migrations.AddMembershioTable do
+defmodule AuroraGov.Projector.Repo.Migrations.AddMembershioTable do
   use Ecto.Migration
 
   def change do

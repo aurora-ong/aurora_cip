@@ -29,7 +29,7 @@ defmodule Seeds.Utils do
 
       org_id = if (parent_id != nil), do: "#{parent_id}.#{org_id}", else: org_id
 
-    organization_command = %AuroraCGP.Command.CreateOU{
+    organization_command = %AuroraGov.Command.CreateOU{
       ou_id: org_id,
       ou_name: org_name,
       ou_description: Faker.Company.bs(),

@@ -1,4 +1,4 @@
-defmodule AuroraCGP.Repo.Migrations.CreatePersonTable do
+defmodule AuroraGov.Repo.Migrations.CreatePersonTable do
   use Ecto.Migration
 
   def change do

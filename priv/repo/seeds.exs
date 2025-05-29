@@ -5,7 +5,7 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     AuroraCGP.Repo.insert!(%AuroraCGP.SomeSchema{})
+#     AuroraGov.Repo.insert!(%AuroraGov.SomeSchema{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
@@ -18,13 +18,13 @@ persons =
   for _i <- 1..15 do
     uuid = Faker.UUID.v4()
 
-    person_command = %AuroraCGP.Command.RegisterPerson{
+    person_command = %AuroraGov.Command.RegisterPerson{
       person_id: uuid,
       person_name: Faker.Person.name(),
       person_mail: Faker.Internet.email()
     }
 
-    :ok = AuroraCGP.dispatch(person_command)
+    :ok = AuroraGov.dispatch(person_command)
 
     IO.inspect(person_command, label: "Person Command")
     uuid
@@ -41,14 +41,14 @@ organizacions =
       |> String.downcase()
 
 
-    organization_command = %AuroraCGP.Command.CreateOU{
+    organization_command = %AuroraGov.Command.CreateOU{
       ou_id: org_id,
       ou_name: org_name,
       ou_description: Faker.Company.bs(),
       ou_goal: Faker.Company.catch_phrase()
     }
 
-    :ok = AuroraCGP.dispatch(organization_command)
+    :ok = AuroraGov.dispatch(organization_command)
 
     IO.inspect(organization_command, label: "Org Command")
 
@@ -56,14 +56,14 @@ organizacions =
       for i <- 1..10 do
         person_id = Enum.at(persons, i)
 
-        membership_command = %AuroraCGP.Command.StartMembership{
+        membership_command = %AuroraGov.Command.StartMembership{
           ou_id: org_id,
           person_id: person_id
         }
 
         IO.inspect(membership_command, label: "Membership Command")
 
-        :ok = AuroraCGP.dispatch(membership_command)
+        :ok = AuroraGov.dispatch(membership_command)
       end
 
     org_id
@@ -74,12 +74,12 @@ organizacions =
 #   org_id = Enum.random(organizacions);
 #   person_id = Enum.random(persons);
 
-#   membership_command = %AuroraCGP.Command.StartMembership{
+#   membership_command = %AuroraGov.Command.StartMembership{
 #     ou_id: org_id,
 #     person_id: person_id
 #   }
 
-#   :ok = AuroraCGP.dispatch(membership_command)
+#   :ok = AuroraGov.dispatch(membership_command)
 
 #   IO.inspect(membership_command, label: "Membership Command")
 

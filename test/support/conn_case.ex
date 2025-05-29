@@ -1,4 +1,4 @@
-defmodule AuroraCGPWeb.ConnCase do
+defmodule AuroraGovWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule AuroraCGPWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use AuroraCGPWeb.ConnCase, async: true`, although
+  by setting `use AuroraGovWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -20,19 +20,19 @@ defmodule AuroraCGPWeb.ConnCase do
   using do
     quote do
       # The default endpoint for testing
-      @endpoint AuroraCGPWeb.Endpoint
+      @endpoint AuroraGovWeb.Endpoint
 
-      use AuroraCGPWeb, :verified_routes
+      use AuroraGovWeb, :verified_routes
 
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import AuroraCGPWeb.ConnCase
+      import AuroraGovWeb.ConnCase
     end
   end
 
   setup tags do
-    AuroraCGP.DataCase.setup_sandbox(tags)
+    AuroraGov.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
@@ -45,7 +45,7 @@ defmodule AuroraCGPWeb.ConnCase do
   test context.
   """
   def register_and_log_in_person(%{conn: conn}) do
-    person = AuroraCGP.PersonsFixtures.person_fixture()
+    person = AuroraGov.PersonsFixtures.person_fixture()
     %{conn: log_in_person(conn, person), person: person}
   end
 
@@ -55,7 +55,7 @@ defmodule AuroraCGPWeb.ConnCase do
   It returns an updated `conn`.
   """
   def log_in_person(conn, person) do
-    token = AuroraCGP.Persons.generate_person_session_token(person)
+    token = AuroraGov.Persons.generate_person_session_token(person)
 
     conn
     |> Phoenix.ConnTest.init_test_session(%{})
