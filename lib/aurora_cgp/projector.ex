@@ -58,14 +58,25 @@ defmodule AuroraCGP.Projector do
         updated_at: metadata.created_at
       }
 
-      Ecto.Multi.insert(multi, :membership_table, projection)
+      multi = multi
+      |> Ecto.Multi.insert(:membership_table_insert, projection, returning: true, preload: [:ou])
+      |> Ecto.Multi.run(:membership_notification, fn repo, %{membership_table_insert: membership} ->
+        # Realizamos una consulta para precargar las asociaciones
+        membership
+        |> repo.preload([:ou, :person])
+        |> then(&{:ok, &1})
+      end)
+
+
     end
   )
 
   @impl Commanded.Projections.Ecto
-  def after_update(event, _metadata, _changes) do
-    Phoenix.PubSub.broadcast(AuroraCGP.PubSub, "projector_update", :uo)
-    IO.inspect(event, label: "Notificando")
+  def after_update(event, metadata, changes) do
+    IO.inspect(event, label: "Notificando (event)")
+    IO.inspect(changes, label: "Notificando (changes)")
+    IO.inspect(metadata, label: "Notificando (metadata)")
+    Phoenix.PubSub.broadcast(AuroraCGP.PubSub, "projector_update", changes)
     :ok
   end
 

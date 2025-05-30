@@ -4,7 +4,10 @@ defmodule MembersPanelComponent do
 
   @impl true
   def mount(socket) do
-    Phoenix.PubSub.subscribe(AuroraCGP.PubSub, "projector_update")
+    if connected?(socket) do
+      Phoenix.PubSub.subscribe(AuroraCGP.PubSub, "projector_update")
+    end
+
     socket =
       socket
       |> assign(:filter, "all")
@@ -12,8 +15,8 @@ defmodule MembersPanelComponent do
     {:ok, socket}
   end
 
+  @impl true
   def update(assigns, socket) do
-
     socket =
       socket
       |> assign(:context, assigns.context)
@@ -25,10 +28,10 @@ defmodule MembersPanelComponent do
     {:ok, socket}
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <section class="card w-4/6 flex flex-col h-fit justify-center items-center">
-
       <div class="flex w-full h-12 flex-row">
         <div class="flex w-fit grow">
           <ul class="flex flex-row gap-3 items-center tabs">
@@ -60,18 +63,19 @@ defmodule MembersPanelComponent do
       </div>
        <hr class="my-5" />
       <div class="relative overflow-x-auto w-full">
-        <table class="w-full text-md text-left text-gray-500">
+        <table class="w-full text-md text-left text-gray-500 rounded-xl">
           <thead class="text-gray-700 uppercase bg-gray-50 text-center">
             <tr>
-            <th scope="col" class="px-6 py-3">
+              <th scope="col" class="px-6 py-3">
                 Id
               </th>
+
               <th scope="col" class="px-6 py-3">
                 Nombre miembro
               </th>
 
               <th scope="col" class="px-6 py-3">
-                Estado miembro
+                Status miembro
               </th>
 
               <th scope="col" class="px-6 py-3">
@@ -83,13 +87,13 @@ defmodule MembersPanelComponent do
           <tbody>
             <%= for m <- @members do %>
               <tr class="bg-gray-200 border-b">
-
-              <th
+                <th
                   scope="row"
                   class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center"
                 >
                   <%= m.person.person_id %>
                 </th>
+
                 <th
                   scope="row"
                   class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center"
@@ -113,15 +117,15 @@ defmodule MembersPanelComponent do
     """
   end
 
+@impl true
   def handle_event("update_filter", %{"filter" => filter}, socket) do
     IO.inspect(filter, label: "QQ")
 
     {:noreply, assign(socket, filter: filter)}
   end
 
-  @impl true
   def handle_info(msg, socket) do
-    IO.inspect(msg, label: "Actualizando PUBSUB")
+    IO.inspect(msg, label: "Actualizando PUBSUB Panel Members")
     {:noreply, socket}
   end
 end

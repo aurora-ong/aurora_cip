@@ -1,6 +1,7 @@
 defmodule AuroraCGPWeb.PanelLive do
   use AuroraCGPWeb, :live_view
 
+  @impl true
   def mount(_params, _session, socket) do
     socket =
       socket
@@ -9,6 +10,7 @@ defmodule AuroraCGPWeb.PanelLive do
     {:ok, socket}
   end
 
+  @impl true
   def handle_params(params, uri, socket) do
     socket =
       socket
@@ -108,7 +110,26 @@ defmodule AuroraCGPWeb.PanelLive do
 
   @impl true
   def handle_info(msg, socket) do
-    IO.inspect(msg, label: "Actualizando PUBSUB")
+    IO.inspect(msg, label: "Actualizando PUBSUB Panel Live")
+
+    socket =
+      socket
+      |> create_notification(msg)
+
     {:noreply, socket}
+  end
+
+  defp create_notification(socket, msg) do
+    case msg do
+      %{membership_notification: %{person: person, ou: ou}} ->
+        put_flash(
+          socket,
+          :info,
+          "#{person.person_name} (#{person.person_id}) ahora es miembro de #{ou.ou_name} (#{ou.ou_id})"
+        )
+
+      _ ->
+        socket
+    end
   end
 end
